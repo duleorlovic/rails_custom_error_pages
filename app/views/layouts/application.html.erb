@@ -10,7 +10,30 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-turbo="false">
+    <header>
+      Hello <span class="red"><%= current_user.email %></span>
+    </header>
     <%= yield %>
+    <footer>
+      <hr>
+      In development mode you will see the errors. Run in production mode <code>rails s -e production</code> to see that public/404.html is rendered.
+      <ol>
+        <li>
+          <%= link_to "Root path", "/" %>
+        </li>
+        <li>
+          <%= link_to "Not Found 404", "/asd" %>
+        </li>
+        <li>
+          <%= link_to "First clear authenticity_token from button", "#", onclick: 'document.getElementsByName("authenticity_token")[0].value = 123' %> than click on
+
+          <%= button_to "Unprocessable Entity 422", pages_submit_path %>
+        </li>
+        <li>
+          <%= link_to "Server Error 500", pages_error_path %>
+        </li>
+      </ol>
+    </footer>
   </body>
 </html>
