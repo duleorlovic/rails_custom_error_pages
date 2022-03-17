@@ -43,3 +43,25 @@ curl -I localhost:3000/asd
 curl -D - localhost:3000/pages/submit --data ""
 curl -I localhost:3000/pages/error
 ```
+
+# Add custom error pages
+
+We will follow https://web-crunch.com/posts/custom-error-page-ruby-on-rails
+```
+rails g controller errors not_found unprocessable_entity internal_server_error --no-helper
+```
+add three route matches
+```
+# config/routes.rb
+  match "/404", to: "errors#not_found", via: :all
+  match "/422", to: "errors#unprocessable_entity", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
+```
+and use `routes` as exceptions_app
+```
+# config/application.rb
+    # https://web-crunch.com/posts/custom-error-page-ruby-on-rails
+    config.exceptions_app = routes
+```
+
+and that's it 🎉

@@ -33,5 +33,8 @@ module RailsCustomErrorPages
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # https://web-crunch.com/posts/custom-error-page-ruby-on-rails
+    config.exceptions_app = routes
   end
 end
